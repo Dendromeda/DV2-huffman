@@ -1,0 +1,3 @@
+# DV2-huffman
+
+HUFF HUFF HUFFMANPUFF
