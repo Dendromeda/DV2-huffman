@@ -1,9 +1,9 @@
 
 
-struct label {
+typedef struct label {
 	char c;
 	int frq;
-}
+};
 
 /* Function qPriorityFunc
  * Input: two treeNode pointers to compare

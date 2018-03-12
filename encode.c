@@ -1,32 +1,33 @@
 #include "encode.h"
 
 /* Function encode
- * Input: root treeNode from huffman tree, file pointers to input 
+ * Input: root treeNode from huffman tree, file pointers to input
  * and output files
  * Output: writes encoded data to output file
  */
 void encode(treeNode *n, FILE *in, FILE *out){
 	bitset **arr = buildTable(n);
+
 	int c = fgetc(in);
 	int j = 0;
 	bool b;
 	bitset *charBSet = arr[c];
 	bitset *bSet = bitset_empty();
-	while (c != EOF){	
+	while (c != EOF){
 		for (int i = 7; i >= 0; i--){
+			// Internal loop runs for each character written to output file
 			b = bitset_memberOf(charBSet, j);
 			bitset_setBitValue(bSet, i, b);
 			j++;
-			if (j >= bitset_size(arr[c])){
+			//If input character bitsequence is done,reads new character
+			if (j >= bitset_size(charBSet)){
 				j = 0;
 				c = fgetc(in);
-				if (c == EOF){
-					i = 0;
-				}
-				else {
+				// If new file is EOF, exits internal loop
+				if (c != EOF){
 					charBSet = arr[c];
 				}
-				
+
 			}
 		}
 		fprintf(out, "%s", bitset_toByteArray(bSet));
@@ -36,9 +37,9 @@ void encode(treeNode *n, FILE *in, FILE *out){
 	}
 	free(arr);
 }
- 
+
 /*Function buildBitset
- * Input: array of booleans of size CHAR_SET_SIZE, int as number of 
+ * Input: array of booleans of size CHAR_SET_SIZE, int as number of
  * relevant elements
  * Output: created bitset from array
  */
@@ -57,12 +58,12 @@ bitset *buildBitset(list *l){
 /* Function buildTable
  * Input: root treeNode of huffman tree
  * Output: array of bitset pointers acting as table, with array index as key
- * Uses depth-first traversing to find each leaf and add the sequence as abitset 
+ * Uses depth-first traversing to find each leaf and add the sequence as abitset
  * to the array
  */
 bitset **buildTable(treeNode *n){
 	list *l = list_empty();
-	bitset **bitsetArray = malloc(sizeof(bitset)*CHAR_SET_SIZE);			
+	bitset **bitsetArray = malloc(sizeof(bitset)*CHAR_SET_SIZE);
 	depthFirst(n, l, bitsetArray);
 	binTreeKill(n, *free);
 	list_kill(l);
@@ -70,7 +71,7 @@ bitset **buildTable(treeNode *n){
 }
 
 void depthFirst(treeNode *n, list *l, bitset **arr){
-	
+
 	if (binTreeIsLeaf(n)){
 		int c = binTreeGetLabel(n)->c;
 		arr[c-CHAR_OFFSET] = buildBitset(l);
@@ -87,7 +88,7 @@ void depthFirst(treeNode *n, list *l, bitset **arr){
 
 /* Function listRemoveEndNode
  * Input: List to be altered
- * Output: 
+ * Output:
  */
 void listRemoveEndNode(list *l){
 	if (list_is_empty(l)){

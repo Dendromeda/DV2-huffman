@@ -5,11 +5,6 @@
 #include "binaryTree.h"
 #include "buildTree.h"
 
-/* Function convertToBitset
- * Input: int value to be converted
- * Output: bitset with converted bitsequence
- */
-bitset *convertToBitset(int c);
 
 /* Function decode
  * Input: root treeNode of huffman tree, file pointers of input and output files

@@ -7,21 +7,19 @@
 #include "decode.h"
 
 
-void depthfirst(treeNode *n, char *arr, int parentpos, int childpos);
-
 int main(int argc, char **argv){
 	checkArgs(argc);
 	bool mode = checkOption(argv);
 	FILE *key = openFile(argv[2],"rb");
 	FILE *inFile = openFile(argv[3], "rb");
 	FILE *outFile = openFile(argv[4], "wb");
-	
-	
+
+
 	int *frqArr = frequencyAnalysis(key);
 	treeNode *hfmTree = buildHuffmanTree(frqArr);
 	free(frqArr);
-	
-	
+
+
 	if (mode){
 		decode(hfmTree, inFile, outFile);
 		printf("File decoded succesfully.");
@@ -29,31 +27,31 @@ int main(int argc, char **argv){
 	else {
 		encode(hfmTree, inFile, outFile);
 		printf("%ld bytes read from %s\n", ftell(inFile), argv[3]);
-		printf("%ld used in encoded form.", ftell(outFile));
+		printf("%ld used in encoded form.\n", ftell(outFile));
 	}
 	fclose(key);
 	fclose(inFile);
 	fclose(outFile);
-	
+
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*	FILE *fp = openFile("testfile.txt","r");
 	FILE *out = openFile("output.txt", "w");
 	int *iArr = frequencyAnalysis(fp);

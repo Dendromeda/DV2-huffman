@@ -8,13 +8,6 @@ typedef struct treeNode treeNode;
 typedef struct label label;
 typedef void (*freeLabelFunc)(void*);
 
-struct treeNode {
-	label *label;
-	bool leaf;
-	treeNode *children[2];
-};
-
-
 /* Function treeNodeCreate
  * Input: Character as label
  * Output: pointer to a created treeNode;
@@ -39,7 +32,7 @@ void binTreeSetChild(treeNode *parent, treeNode *child, bool b);
  * Output: true if inspected node is flagged as leaf
  */
  bool binTreeIsLeaf(treeNode *n);
- 
+
 /* Function binTreeHasLabel
  * Input: pointer to inspected treeNode
  * Output: bool, true if node has label
@@ -48,10 +41,10 @@ bool binTreeHasLabel(treeNode *n);
 
 /* Function binTreeSetLabel
  * Input: pointer to inspected treeNode
- * Output: 
+ * Output:
  */
  void binTreeSetLabel(treeNode *n, label *l);
- 
+
 /* Function binTreeGetLabel
  * Input: pointer to inspected treeNode
  * Output: pointer to label of given node
@@ -67,9 +60,8 @@ treeNode *binTreeJoinSubtrees(treeNode *n1, treeNode *n2, label *l);
 /* Function binTreeKill
  * Input: tree to be killed
  * Output:
- * Uses post order depth-first to free memory of each node in the tree 
+ * Uses post order depth-first to free memory of each node in the tree
  */
 void binTreeKill(treeNode *n, freeLabelFunc freeLabel);
 
 #endif
-

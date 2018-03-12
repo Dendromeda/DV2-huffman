@@ -1,19 +1,5 @@
 #include "decode.h"
 
-/* Function convertToBitset
- * Input: character to be converted
- * Output: bitset with converted bitsequence
- */
-bitset *convertToBitset(int c){
-	bitset *b = bitset_empty();
-	int d = 128;
-	for (int i = 0; i < 8; i++){
-		bitset_setBitValue(b, i, (bool)c/d);
-		c = c%d;
-		d = d/2;
-	}
-	return b;
-}
 
 /* Function decode
  * Input: root treeNode of huffman tree, file pointers of input and output files

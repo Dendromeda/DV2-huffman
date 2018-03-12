@@ -1,9 +1,16 @@
 #include "binaryTree.h"
 
+
+struct treeNode {
+	label *label;
+	bool leaf;
+	treeNode *children[2];
+};
+
 /* Function treeNodeCreate
- * Input: Character as label
- * Output: pointer to a created treeNode;
- */
+* Input: Character as label
+* Output: pointer to a created treeNode;
+*/
 treeNode *treeNodeCreate(label *l){
 	treeNode *n = malloc(sizeof(treeNode));
 	n->label = l;
@@ -50,12 +57,12 @@ bool binTreeHasLabel(treeNode *n){
 
 /* Function binTreeSetLabel
  * Input: pointer to inspected treeNode
- * Output: 
+ * Output:
  */
 void binTreeSetLabel(treeNode *n, label *l){
 	 n->label = l;
  }
- 
+
 /* Function binTreeGetLabel
  * Input: pointer to inspected treeNode
  * Output: pointer to label of given node
@@ -63,7 +70,7 @@ void binTreeSetLabel(treeNode *n, label *l){
 label *binTreeGetLabel(treeNode *n){
 	 return n->label;
  }
- 
+
  /*Function binTreeJoinSubtrees
   * Input: two treeNodes acting as root of subtrees, label
   * Output: new treeNode with given nodes as children and label added
@@ -74,11 +81,11 @@ treeNode *binTreeJoinSubtrees(treeNode *n1, treeNode *n2, label *l){
 	 binTreeSetChild(p,n2,1);
 	 return p;
  }
- 
+
 /* Function binTreeKill
  * Input: tree to be killed
  * Output:
- * Uses post order depth-first to free memory of each node in the tree 
+ * Uses post order depth-first to free memory of each node in the tree
  */
 void binTreeKill(treeNode *n, freeLabelFunc freeLabel){
 	if (binTreeHasLabel(n))
